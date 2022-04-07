@@ -1,0 +1,17 @@
+.message-chat-body {
+    height: 100%;
+    overflow: auto;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    overflow-y:auto;
+}
+
+.message-chat-body div:first-child {
+    margin-top: auto;
+}
+
+.message-right {
+    display: flex;
+    align-items: flex-end;
+}

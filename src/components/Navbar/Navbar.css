@@ -1,0 +1,36 @@
+nav {
+    height: 60px;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+nav h2 {
+    font-size: 35px;
+    letter-spacing: 3px;
+    margin-left: 15px;
+    color: white;
+}
+
+nav .inputs {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-right: 15px;
+}
+
+nav .inputs label {
+    color: white;
+}
+
+nav .inputs input {
+    width: 180px;
+    height: 25px;
+    border-top: 1px solid #767676;
+}

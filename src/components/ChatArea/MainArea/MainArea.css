@@ -1,0 +1,26 @@
+.chat-mainarea {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 100%
+}
+
+.chat-mainarea .avatar {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+}
+
+.chat-mainarea-header {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+}
+
+.chat-mainarea-body {
+    height: 100%;
+    overflow:auto;
+}
+
+.chat-mainarea-footer {
+    padding: 10px 10px;
+    height: 60px;
+}

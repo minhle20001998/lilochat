@@ -1,0 +1,27 @@
+.chat-area {
+    flex:100%;
+    height: 100%;
+    border-top: 1px solid #770000;
+    border-left: 1px solid #770000;
+    border-bottom: 1px solid #770000;
+    display: flex;
+    flex-direction: row;
+}
+
+.chat-subarea {
+    border-left: 1px solid #770000;
+    flex: 300px
+}
+
+.chat-mainarea-header, .chat-subarea-header {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    color: #770000;
+    padding: 10px 20px;
+}
+
+.chat-subarea-header {
+    border-bottom: 1px solid #770000;
+    justify-content: center;
+}

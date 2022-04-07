@@ -1,0 +1,17 @@
+.message-bubble {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.message-bubble-sender {
+    font-size: 12px;
+}
+
+.message-bubble-content {
+    padding: 8px 10px;
+    background-color: rgb(73, 73, 73);
+    width: fit-content;
+    max-width: 50%;
+}
