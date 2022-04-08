@@ -10,7 +10,77 @@ const messTest = [
         content: 'Hhehe'
     },
     {
-        id: 2,
+        id: 22,
+        sender: 'Me',
+        content: 'Hahaha'
+    },
+    {
+        id: 12,
+        sender: 'Nguyen',
+        content: 'Hhehe'
+    },
+    {
+        id: 21,
+        sender: 'Me',
+        content: 'Hahaha'
+    },
+    {
+        id: 16,
+        sender: 'Nguyen',
+        content: 'Hhehe'
+    },
+    {
+        id: 29,
+        sender: 'Me',
+        content: 'Hahaha'
+    },
+    {
+        id: 17,
+        sender: 'Nguyen',
+        content: 'Hhehe'
+    },
+    {
+        id: 25,
+        sender: 'Me',
+        content: 'Hahaha'
+    },
+    {
+        id: 33,
+        sender: 'Nguyen',
+        content: 'Hhehe'
+    },
+    {
+        id: 44,
+        sender: 'Me',
+        content: 'Hahaha'
+    },
+    {
+        id: 5,
+        sender: 'Nguyen',
+        content: 'Hhehe'
+    },
+    {
+        id: 6,
+        sender: 'Me',
+        content: 'Hahaha'
+    },
+    {
+        id: 7,
+        sender: 'Nguyen',
+        content: 'Hhehe'
+    },
+    {
+        id: 8,
+        sender: 'Me',
+        content: 'Hahaha'
+    },
+    {
+        id: 9,
+        sender: 'Nguyen',
+        content: 'Hhehe'
+    },
+    {
+        id: 10,
         sender: 'Me',
         content: 'Hahaha'
     },
@@ -29,7 +99,7 @@ export default function MainArea() {
                 <h5 className='m-0' style={{ fontSize: '20px' }}>Group ABCXYZ</h5>
             </div>
             <div className='chat-mainarea-body'>
-                <Body mess={mess} />
+                <Body mess={mess} setMess={setMess} />
             </div>
             <div className='chat-mainarea-footer'>
                 <ChatInput mess={mess} setMess={setMess} />
