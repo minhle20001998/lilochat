@@ -32,7 +32,7 @@ export default function Body({ mess, setMess }) {
         }
     }, [mess])
 
-    const lastBookElementRef = useCallback(node => {
+    const lastElementRef = useCallback(node => {
         if (loading) return
         if (observer.current) observer.current.disconnect()
         observer.current = new IntersectionObserver(entries => {
@@ -50,7 +50,7 @@ export default function Body({ mess, setMess }) {
                 return <div key={m.id} >
                     {oldAnchorIndex === m.id && <div ref={oldAnchorRef}></div>}
                     <div
-                        ref={(index === 0) ? lastBookElementRef : null}
+                        ref={(index === 0) ? lastElementRef : null}
                         className={`${m.sender === 'Me' ? 'message-right' : 'message-left'} }`}
                     >
                         <Bubble mess={m} />
