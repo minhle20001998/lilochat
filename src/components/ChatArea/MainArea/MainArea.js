@@ -26,7 +26,7 @@ export default function MainArea() {
         <div className="chat-mainarea">
             <div className='chat-mainarea-header'>
                 <img className='avatar' src={src} alt='' />
-                <h5 className='m-0'>Group ABCXYZ</h5>
+                <h5 className='m-0' style={{ fontSize: '20px' }}>Group ABCXYZ</h5>
             </div>
             <div className='chat-mainarea-body'>
                 <Body mess={mess} />

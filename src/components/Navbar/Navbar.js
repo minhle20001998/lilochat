@@ -4,7 +4,7 @@ export default function Navbar({ isLogin }) {
     return (
         <div style={{ position: 'relative' }}>
             <nav>
-                <h2>
+                <h2 className="my-0">
                     <span style={{ color: 'red' }}>N</span>
                     <span>i</span>
                     <span style={{ color: 'red' }}>N</span>

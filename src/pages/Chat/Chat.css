@@ -3,4 +3,6 @@
     flex-direction: row;
     background-color: rgb(19, 19, 19);
     height: calc(100vh - 60px);
+    overflow: hidden;
+    border-top: 1px solid #770000;
 }
