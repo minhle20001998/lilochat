@@ -1,0 +1,5 @@
+.DraftEditor-root {
+    height: fit-content;
+    max-height: 150px;
+    overflow-y: auto;
+}

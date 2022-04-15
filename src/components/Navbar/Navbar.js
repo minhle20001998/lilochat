@@ -3,7 +3,7 @@ import './Navbar.css'
 export default function Navbar({ isLogin }) {
     return (
         <div style={{ position: 'relative' }}>
-            <nav>
+            <nav className='master-nav'>
                 <h2 className="my-0">
                     <span style={{ color: 'red' }}>N</span>
                     <span>i</span>

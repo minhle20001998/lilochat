@@ -1,0 +1,16 @@
+.editor {
+    box-sizing: border-box;
+    cursor: text;
+    height: 100%;
+    padding: 10px;
+    background-color: #202020;
+    box-shadow: inset 0px 1px 8px -3px #ababab;
+  }
+
+  .editor span {
+      color: white;
+  }
+  
+  .editor :global(.public-DraftEditor-content) {
+  }
+  

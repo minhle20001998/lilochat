@@ -1,0 +1,25 @@
+.file-drag-wrapper {
+    position: relative;
+    border: 2px dashed rgb(102, 102, 102);
+    z-index: 1000;
+    background-color: rgb(33, 33, 33);
+}
+
+.file-drag-wrapper p {
+    margin: 40px 0;
+}
+
+.file-drag-wrapper input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.file-drag-wrapper:hover, .file-drag-wrapper.dragover {
+    background-color: rgb(48, 48, 48);
+    opacity: 0.8;
+}
