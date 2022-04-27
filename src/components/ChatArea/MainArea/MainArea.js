@@ -10,6 +10,8 @@ export default function MainArea({ groupName, setActiveChatList, setActiveChatSe
     const [mess, setMess] = useState([]);
 
 
+
+
     return (
         <div className="chat-mainarea" style={{ position: 'relative' }}>
             <div className='chat-mainarea-header'
@@ -32,7 +34,15 @@ export default function MainArea({ groupName, setActiveChatList, setActiveChatSe
                         <div></div>
                     </div>
                     <img className='avatar' src={src} alt='' />
-                    <h5 className='m-0' style={{ fontSize: '20px' }}>{groupName}</h5>
+                    <h5 className='m-0' style={{
+                        fontSize: '20px',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        maxWidth: '200px'
+                    }}>
+                        {groupName}
+                    </h5>
                 </div>
                 <div>
                     <div className='hamberger-icon'
@@ -52,6 +62,6 @@ export default function MainArea({ groupName, setActiveChatList, setActiveChatSe
                 {/* <ChatInput mess={mess} setMess={setMess} /> */}
                 <RichTextInput setMess={setMess} />
             </div>
-        </div>
+        </div >
     )
 }

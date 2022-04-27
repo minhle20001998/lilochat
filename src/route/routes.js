@@ -1,6 +1,6 @@
-import BasicLayout from "./layouts/BasicLayout";
-import Chat from "./pages/Chat/Chat";
-import Login from "./pages/Login/Login";
+import BasicLayout from "../layouts/BasicLayout";
+import Chat from "../pages/Chat/Chat";
+import Login from "../pages/Login/Login";
 
 const routes = () => {
     return [

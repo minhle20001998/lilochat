@@ -5,14 +5,14 @@ import React, {
     useRef,
     useState,
 } from 'react';
-import { EditorState, ContentState, SelectionState, Modifier } from 'draft-js';
-import Editor from "draft-js-plugins-editor";
+import { EditorState, Modifier } from 'draft-js';
+import Editor from '@draft-js-plugins/editor';
 import createMentionPlugin, {
     defaultSuggestionsFilter
-} from "draft-js-mention-plugin";
+} from "@draft-js-plugins/mention";
 import editorStyles from './editorStyles.module.css';
 import 'draft-js/dist/Draft.css';
-import "draft-js-mention-plugin/lib/plugin.css";
+import '@draft-js-plugins/mention/lib/plugin.css';
 import mentionsStyles from './MentionsStyles.module.css';
 import './RichTextInput.css'
 import { convertToRaw } from 'draft-js';
@@ -57,6 +57,7 @@ export default function RichTextInput({ setMess }) {
     );
     const [suggestions, setSuggestions] = useState(mentions);
     const [mentionPeople, setMentionPeople] = useState([]);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         const contentState = editorState.getCurrentContent();
@@ -74,6 +75,10 @@ export default function RichTextInput({ setMess }) {
         }
         setMentionPeople(mentionedUsers)
     }, [editorState])
+
+    const onOpenChange = useCallback((_open) => {
+        setOpen(_open);
+    }, []);
 
     const { MentionSuggestions, plugins } = useMemo(() => {
         const mentionPlugin = createMentionPlugin({ mentionPrefix: '@', theme: mentionsStyles });
@@ -164,9 +169,11 @@ export default function RichTextInput({ setMess }) {
                     suggestions={suggestions}
                     onSearchChange={onSearchChange}
                     entryComponent={Entry}
+                    open={open}
+                    onOpenChange={onOpenChange}
                 />
                 <Editor
-                    placeholder='aA'
+                    placeholder='@ to tag someone'
                     editorKey={'editor'}
                     editorState={editorState}
                     onChange={setEditorState}
@@ -192,8 +199,10 @@ function Entry(props) {
         ...parentProps
     } = props;
 
+    const { selectMention, ...rest } = parentProps;
+    
     return (
-        <div {...parentProps} style={{ padding: '8px' }}>
+        <div {...rest} style={{ padding: '8px' }}>
             <div className={theme?.mentionSuggestionsEntryContainer}>
                 <div className={theme?.mentionSuggestionsEntryContainerLeft}>
                     <img

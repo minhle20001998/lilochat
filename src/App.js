@@ -1,6 +1,6 @@
 import { useRoutes } from 'react-router';
 import './App.css';
-import routes from './routes';
+import routes from './route/routes';
 
 function App() {
   const content = useRoutes(routes());
