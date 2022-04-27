@@ -28,6 +28,9 @@ export default function useMessengerLoad({ setMess, pageNumber }) {
     const [hasMore, setHasMore] = useState(true)
 
     useEffect(() => {
+        //
+        setHasMore(true)
+        //
         setTimeout(() => {
             setLoading(true)
             setError(false)

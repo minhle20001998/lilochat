@@ -5,4 +5,27 @@
     height: calc(100vh - 60px);
     overflow: hidden;
     border-top: 1px solid #770000;
+    position: relative;
+}
+
+.exit-btn {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .exit-btn.active {
+        display: block;
+        position: fixed;
+        right: 20px;
+        top: 70px;
+        z-index: 103;
+        width: 30px;
+        height: 30px;
+        background-color: rgb(78, 78, 78);
+        border: 2px solid rgb(92, 0, 0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
 }

@@ -1,5 +1,5 @@
 .chat-area {
-    flex:100%;
+    flex: 100%;
     height: 100%;
     border-top: 1px solid #770000;
     border-left: 1px solid #770000;
@@ -9,6 +9,8 @@
 }
 
 .chat-subarea {
+    height: 100%;
+    overflow: auto;
     border-left: 1px solid #770000;
     flex: 300px
 }
@@ -24,4 +26,25 @@
 .chat-subarea-header {
     border-bottom: 1px solid #770000;
     justify-content: center;
+}
+
+@media (max-width: 900px) {
+
+    .chat-subarea {
+        position: absolute;
+        transform: translateX(-101%);
+    }
+
+    .chat-subarea.active {
+        width: 100%;
+        height: 100%;
+        transform: translateX(0);
+        z-index: 102;
+        background-color: rgb(19, 19, 19);
+    }
+
+    .chat-subarea-members {
+        height: fit-content !important;
+        max-height: 200px !important;
+    }
 }

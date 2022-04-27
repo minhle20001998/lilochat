@@ -7,10 +7,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   position: relative;
   width: 100vw;
+  background-color: #242424;
 }
 
 * {
   box-sizing: border-box;
   color: white;
   font-family: sans-serif;
+}
+
+p {
+  margin: 0 !important
 }

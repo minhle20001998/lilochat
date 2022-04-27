@@ -3,3 +3,14 @@
     max-height: 150px;
     overflow-y: auto;
 }
+
+.submit-btn {
+    background-color: transparent;
+    border: none;
+    margin-left: 8px;
+    margin-bottom: 10px;
+}
+
+.submit-btn:hover {
+    color: rgb(189, 38, 38);
+}

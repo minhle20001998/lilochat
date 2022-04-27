@@ -15,3 +15,13 @@
     width: fit-content;
     max-width: 50%;
 }
+
+.tag_link {
+    color: #f64545;
+    text-decoration: none;
+}
+
+.tag_link:hover {
+    color: #f64545;
+    text-decoration: underline;
+}

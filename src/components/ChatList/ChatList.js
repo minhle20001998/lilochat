@@ -25,7 +25,7 @@ export default function ChatList() {
         { id: 4, name: 'group141' },
         { id: 5, name: 'group1123' },
         { id: 6, name: 'group113' },
-       
+
     ];
 
     return (

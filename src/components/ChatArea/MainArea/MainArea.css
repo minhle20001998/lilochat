@@ -13,16 +13,42 @@
 
 .chat-mainarea-header {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
-    z-index: 100;
+    z-index: 10;
     background-color: #242424;
 }
 
 .chat-mainarea-body {
     height: 100%;
-    overflow:auto;
+    overflow: auto;
 }
 
 .chat-mainarea-footer {
     padding: 10px 10px;
     height: fit-content;
+}
+
+.hamberger-icon {
+    width: 30px;
+    height: 30px;
+    border: 1px solid gray;
+    padding: 5px;
+    margin-right: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3px;
+    cursor: pointer;
+    display: none;
+}
+
+.hamberger-icon>div {
+    width: 100%;
+    background-color: gray;
+    height: 2px;
+}
+
+@media (max-width: 900px) {
+    .hamberger-icon {
+        display: flex;
+    }
 }

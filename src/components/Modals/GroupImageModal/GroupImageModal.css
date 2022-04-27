@@ -1,12 +1,12 @@
 .file-drag-wrapper {
     position: relative;
     border: 2px dashed rgb(102, 102, 102);
-    z-index: 1000;
+    z-index: 101;
     background-color: rgb(33, 33, 33);
 }
 
 .file-drag-wrapper p {
-    margin: 40px 0;
+    margin: 40px 0 !important;
 }
 
 .file-drag-wrapper input {

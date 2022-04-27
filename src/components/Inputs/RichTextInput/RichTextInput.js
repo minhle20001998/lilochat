@@ -11,10 +11,12 @@ import createMentionPlugin, {
     defaultSuggestionsFilter
 } from "draft-js-mention-plugin";
 import editorStyles from './editorStyles.module.css';
+import 'draft-js/dist/Draft.css';
 import "draft-js-mention-plugin/lib/plugin.css";
 import mentionsStyles from './MentionsStyles.module.css';
 import './RichTextInput.css'
 import { convertToRaw } from 'draft-js';
+import getDefaultKeyBinding from 'draft-js/lib/getDefaultKeyBinding';
 
 const mentions = [
     {
@@ -47,12 +49,11 @@ const mentions = [
     }
 ];
 
-export default function RichTextInput() {
+export default function RichTextInput({ setMess }) {
     const ref = useRef(null);
     const [editorState, setEditorState] = useState(() =>
         EditorState.createEmpty()
     );
-    const [open, setOpen] = useState(false);
     const [suggestions, setSuggestions] = useState(mentions);
     const [mentionPeople, setMentionPeople] = useState([]);
 
@@ -84,106 +85,69 @@ export default function RichTextInput() {
         setSuggestions(defaultSuggestionsFilter(value, mentions));
     }, []);
 
-    function getIndicesOf(searchStr, str, caseSensitive, link) {
-        var searchStrLen = searchStr.length;
-        if (searchStrLen === 0) {
-            return [];
+    const submit = () => {
+        if (editorState.getCurrentContent().hasText()) {
+            setMess((prev) => {
+                return [...prev,
+                {
+                    id: Date.now(),
+                    sender: 'Me',
+                    content: convertToRaw(editorState.getCurrentContent())
+                }]
+            })
+            setEditorState(EditorState.createEmpty())
         }
-        var startIndex = 0,
-            index, indices = [];
-        if (!caseSensitive) {
-            str = str.toLowerCase();
-            searchStr = searchStr.toLowerCase();
-        }
-        while ((index = str.indexOf(searchStr, startIndex)) > -1) {
-            if (!str[index - 1] || str[index - 1] === " ") {
-                indices.push([index, index + searchStrLen, link]);
-            }
-            startIndex = index + searchStrLen;
-        }
-        return indices;
     }
 
-    function convertToHtml(raw) {
-        const container = document.createElement('div');
-        raw.blocks.forEach((e) => {
-            const obj = {};
-            const text = e.text;
-            const arrayOfIndices = [];
-            for (let key of Object.keys(raw.entityMap)) {
-                if (raw.entityMap[key].data.mention.name in obj) {
-                    continue;
-                } else {
-                    obj[raw.entityMap[key].data.mention.name] = 1;
-                }
-                const mentionName = `@${raw.entityMap[key].data.mention.name}`
-                const indices = getIndicesOf(mentionName, text, true, raw.entityMap[key].data.mention.link);
-                arrayOfIndices.push(...indices);
-            }
-            //
-            const p = document.createElement('p');
+    const handleKeyCommand = (command) => {
+        if (command === 'enter_command') {
+            submit();
+            return 'handled';
+        }
+        return 'not-handled';
+    }
 
-            if (arrayOfIndices.length === 0) {
-                const span = document.createElement('span');
-                span.textContent = text
-                p.appendChild(span);
+    const myKeyBindingFn = (e) => {
+        if (e.keyCode === 13 /* `enter` key */) {
+            if (e.nativeEvent.shiftKey) {
+                // Alt + Enter
             } else {
-                //initiate the first splice
-                const firstIndex = arrayOfIndices[0][0];
-                if (text.substring(0, firstIndex)) {
-                    const span = document.createElement('span');
-                    span.textContent = text.substring(0, firstIndex);
-                    p.appendChild(span);
-                }
-                arrayOfIndices.forEach((el, index) => {
-                    const firstIndex = el[0];
-                    const secondIndex = el[1];
-                    const link = el[2];
-                    const a = document.createElement('a');
-                    a.href = link;
-                    a.textContent = text.substring(firstIndex, secondIndex);
-                    p.appendChild(a);
-                    if (index < arrayOfIndices.length - 1) {
-                        const firstIndexOfNextElement = arrayOfIndices[index + 1][0];
-                        const span = document.createElement('span');
-                        span.textContent = text.substring(secondIndex, firstIndexOfNextElement);
-                        p.appendChild(span);
-                    }
-                })
-
-                const lastIndex = arrayOfIndices[arrayOfIndices.length - 1][1];
-                if (text.substring(lastIndex, text.length - 1)) {
-                    const span = document.createElement('span');
-                    span.textContent = text.substring(lastIndex, text.length);
-                    p.appendChild(span);
-                };
+                // Enter
+                return 'enter_command';
             }
-            container.appendChild(p);
-        })
-        return container.innerHTML;
+        }
+        //else...
+        return getDefaultKeyBinding(e);
     }
 
     return (
-        <div
-            className={editorStyles.editor}
-            onClick={() => {
-                ref.current.focus();
-            }}
-        >
-            <MentionSuggestions
-                open={open}
-                suggestions={suggestions}
-                onSearchChange={onSearchChange}
-                entryComponent={Entry}
-            />
-            <Editor
-                editorKey={'editor'}
-                editorState={editorState}
-                onChange={setEditorState}
-                plugins={plugins}
-                ref={ref}
-            />
-
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div
+                className={editorStyles.editor}
+                style={{ width: '100%' }}
+                onClick={() => {
+                    ref.current.focus();
+                }}
+            >
+                <MentionSuggestions
+                    suggestions={suggestions}
+                    onSearchChange={onSearchChange}
+                    entryComponent={Entry}
+                />
+                <Editor
+                    placeholder='aA'
+                    editorKey={'editor'}
+                    editorState={editorState}
+                    onChange={setEditorState}
+                    handleKeyCommand={handleKeyCommand}
+                    keyBindingFn={myKeyBindingFn}
+                    plugins={plugins}
+                    ref={ref}
+                />
+            </div>
+            <div className='d-flex flex-column justify-content-end'>
+                <button className='submit-btn' onClick={submit}>Send</button>
+            </div>
         </div>
     );
 }

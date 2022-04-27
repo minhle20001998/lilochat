@@ -23,7 +23,7 @@ export default function Navbar({ isLogin }) {
                     </form>
                 </div> : <></>}
             </nav>
-            <div style={{ height: '60px' }}></div>
+            {/* <div style={{ height: '60px' }}></div> */}
         </div>
     )
 }

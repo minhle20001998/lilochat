@@ -7,6 +7,10 @@ import './SubArea.css'
 const a = [
     { id: 1, status: 'online', name: 'minh' },
     { id: 2, status: 'offline', name: 'nguyen' },
+    { id: 2, status: 'offline', name: 'nguyen' },
+    { id: 2, status: 'offline', name: 'nguyen' },
+    { id: 2, status: 'offline', name: 'nguyen' },
+    { id: 2, status: 'offline', name: 'nguyen' },
 ];
 
 export default function SubArea({ setGroupName }) {
