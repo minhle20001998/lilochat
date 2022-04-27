@@ -5,7 +5,7 @@ import React, {
     useRef,
     useState,
 } from 'react';
-import { EditorState } from 'draft-js';
+import { EditorState, ContentState, SelectionState, Modifier } from 'draft-js';
 import Editor from "draft-js-plugins-editor";
 import createMentionPlugin, {
     defaultSuggestionsFilter
@@ -17,6 +17,7 @@ import mentionsStyles from './MentionsStyles.module.css';
 import './RichTextInput.css'
 import { convertToRaw } from 'draft-js';
 import getDefaultKeyBinding from 'draft-js/lib/getDefaultKeyBinding';
+import { RichUtils } from 'draft-js';
 
 const mentions = [
     {
@@ -85,6 +86,35 @@ export default function RichTextInput({ setMess }) {
         setSuggestions(defaultSuggestionsFilter(value, mentions));
     }, []);
 
+    const removeSelectedBlocksStyle = (editorState) => {
+        const newContentState = RichUtils.tryToRemoveBlockStyle(editorState);
+        if (newContentState) {
+            return EditorState.push(editorState, newContentState, 'change-block-type');
+        }
+        return editorState;
+    }
+
+    const getResetEditorState = (editorState) => {
+        const blocks = editorState
+            .getCurrentContent()
+            .getBlockMap()
+            .toList();
+        const updatedSelection = editorState.getSelection().merge({
+            anchorKey: blocks.first().get('key'),
+            anchorOffset: 0,
+            focusKey: blocks.last().get('key'),
+            focusOffset: blocks.last().getLength(),
+        });
+        const newContentState = Modifier.removeRange(
+            editorState.getCurrentContent(),
+            updatedSelection,
+            'forward'
+        );
+
+        const newState = EditorState.push(editorState, newContentState, 'remove-range');
+        return removeSelectedBlocksStyle(newState)
+    }
+
     const submit = () => {
         if (editorState.getCurrentContent().hasText()) {
             setMess((prev) => {
@@ -95,7 +125,8 @@ export default function RichTextInput({ setMess }) {
                     content: convertToRaw(editorState.getCurrentContent())
                 }]
             })
-            setEditorState(EditorState.createEmpty())
+            const editor = getResetEditorState(editorState);
+            setEditorState(editor)
         }
     }
 

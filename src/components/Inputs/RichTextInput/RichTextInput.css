@@ -1,16 +1,17 @@
 .DraftEditor-root {
-    height: fit-content;
-    max-height: 150px;
-    overflow-y: auto;
+  height: fit-content;
+  max-height: 150px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .submit-btn {
-    background-color: transparent;
-    border: none;
-    margin-left: 8px;
-    margin-bottom: 10px;
+  background-color: transparent;
+  border: none;
+  margin-left: 8px;
+  margin-bottom: 10px;
 }
 
 .submit-btn:hover {
-    color: rgb(189, 38, 38);
+  color: rgb(189, 38, 38);
 }

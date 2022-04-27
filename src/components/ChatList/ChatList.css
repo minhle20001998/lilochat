@@ -1,51 +1,55 @@
 .chat-list {
-    flex: 300px;
-    height: 100%;
-    border-top: 1px solid #770000;
-    border-bottom: 1px solid #770000;
-    overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  flex: 300px;
+  height: 100%;
+  border-top: 1px solid #770000;
+  border-bottom: 1px solid #770000;
+  overflow: auto;
 }
 
-.list-friend-header, .list-group-header {
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid #770000;
-    color: #770000;
-    padding: 10px 20px;
-
+.list-friend-header,
+.list-group-header {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #770000;
+  color: #770000;
+  padding: 10px 20px;
 }
 
-.list-friend-header h4, .list-group-header h4 {
-    color: #d3b6b6;
+.list-friend-header h4,
+.list-group-header h4 {
+  color: #d3b6b6;
 }
 
 .list-friend-body {
-    max-height: 200px;
-    overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: 200px;
+  overflow: auto;
 }
 
 .list-group-body {
-    max-height: calc(100vh - 360px);
-    overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: calc(100vh - 360px);
+  overflow: auto;
 }
 
 @media (max-width: 900px) {
-    .chat-list {
-        position: absolute;
-        transform: translateX(-100%);
-    }
+  .chat-list {
+    position: absolute;
+    transform: translateX(-100%);
+  }
 
-    .chat-list.active {
-        width: 100%;
-        height: 100%;
-        transform: translateX(0);
-        z-index: 102;
-        background-color: rgb(19, 19, 19);
-    }
+  .chat-list.active {
+    width: 100%;
+    height: 100%;
+    transform: translateX(0);
+    z-index: 102;
+    background-color: rgb(19, 19, 19);
+  }
 
-    .list-group-body {
-        max-height: 200px;
-    }
+  .list-group-body {
+    max-height: 200px;
+  }
 }

@@ -1,18 +1,18 @@
 .message-chat-body {
-    height: 100%;
-    overflow: auto;
-    padding: 5px 10px;
-    display: flex;
-    flex-direction: column;
-    overflow-y:auto;
-    background-color: #242424;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background-color: #242424;
 }
 
 .message-chat-body div:first-child {
-    margin-top: auto;
+  margin-top: auto;
 }
 
 .message-right {
-    display: flex;
-    align-items: flex-end;
+  display: flex;
+  align-items: flex-end;
 }
