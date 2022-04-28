@@ -10,13 +10,31 @@
 }
 
 .message-bubble-content {
-    padding: 8px 10px;
-    background-color: rgb(73, 73, 73);
     width: fit-content;
     max-width: 50%;
 }
 
+.message-bubble-text {
+    padding: 8px 10px;
+    background-color: rgb(73, 73, 73);
+}
+
+.message-bubble-text span {
+    width: 100%;
+    word-break: break-all;
+}
+
+.message-bubble-icon {
+    padding: 0 !important;
+    background-color: transparent !important;
+}
+
+.message-bubble-icon span {
+    font-size: 30px;
+}
+
 .tag_link {
+    word-break: break-all;
     color: #f64545;
     text-decoration: none;
 }

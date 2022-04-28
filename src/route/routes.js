@@ -1,5 +1,7 @@
 import React from "react";
+import Fallback from "../components/Fallback/Fallback";
 import BasicLayout from "../layouts/BasicLayout";
+
 const Chat = React.lazy(() => import("../pages/Chat/Chat"));
 const Login = React.lazy(() => import("../pages/Login/Login"));
 
@@ -8,7 +10,7 @@ const routes = () => {
         {
             path: '/login',
             element:
-                <React.Suspense fallback={<>...</>}>
+                <React.Suspense fallback={<Fallback />}>
                     <Login isLogin={false} />
                 </React.Suspense>,
         },
@@ -18,7 +20,7 @@ const routes = () => {
             children: [
                 {
                     path: '/:id', element:
-                        <React.Suspense fallback={<>...</>}>
+                        <React.Suspense fallback={<Fallback />}>
                             <Chat />
                         </React.Suspense>
                 },

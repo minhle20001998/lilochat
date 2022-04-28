@@ -296,3 +296,9 @@
     border-radius: 0.125em;
     cursor: pointer;
 }
+
+.public-DraftStyleDefault-block.public-DraftStyleDefault-ltr {
+    width: 100%; 
+    word-break: break-all;
+    padding: 0 3px;
+}
