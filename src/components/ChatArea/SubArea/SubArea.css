@@ -15,6 +15,6 @@
 
 .chat-subarea-members {
   -webkit-overflow-scrolling: touch;
-  height: calc(100vh - 310px);
+  height: calc(100vh - 315px);
   overflow: auto;
 }

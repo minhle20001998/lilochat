@@ -5,19 +5,19 @@ import React, {
     useRef,
     useState,
 } from 'react';
-import { EditorState, Modifier } from 'draft-js';
+import { EditorState, Modifier, convertToRaw, RichUtils } from 'draft-js';
 import Editor from '@draft-js-plugins/editor';
 import createMentionPlugin, {
     defaultSuggestionsFilter
 } from "@draft-js-plugins/mention";
+import createEmojiPlugin from '@draft-js-plugins/emoji';
 import editorStyles from './editorStyles.module.css';
 import 'draft-js/dist/Draft.css';
 import '@draft-js-plugins/mention/lib/plugin.css';
-import mentionsStyles from './MentionsStyles.module.css';
+import '@draft-js-plugins/emoji/lib/plugin.css';
 import './RichTextInput.css'
-import { convertToRaw } from 'draft-js';
+import mentionsStyles from './MentionsStyles.module.css';
 import getDefaultKeyBinding from 'draft-js/lib/getDefaultKeyBinding';
-import { RichUtils } from 'draft-js';
 
 const mentions = [
     {
@@ -80,11 +80,21 @@ export default function RichTextInput({ setMess }) {
         setOpen(_open);
     }, []);
 
-    const { MentionSuggestions, plugins } = useMemo(() => {
-        const mentionPlugin = createMentionPlugin({ mentionPrefix: '@', theme: mentionsStyles });
+    const { MentionSuggestions, plugins, EmojiSelect } = useMemo(() => {
+        //mention
+        const mentionPlugin = createMentionPlugin({
+            mentionPrefix: '@',
+            theme: mentionsStyles
+        });
         const { MentionSuggestions } = mentionPlugin;
-        const plugins = [mentionPlugin];
-        return { plugins, MentionSuggestions };
+        //emoji
+        const emojiPlugin = createEmojiPlugin({
+            useNativeArt: true,
+        });
+        const { EmojiSelect } = emojiPlugin;
+        // 
+        const plugins = [mentionPlugin, emojiPlugin];
+        return { plugins, MentionSuggestions, EmojiSelect };
     }, []);
 
     const onSearchChange = useCallback(({ value }) => {
@@ -115,7 +125,6 @@ export default function RichTextInput({ setMess }) {
             updatedSelection,
             'forward'
         );
-
         const newState = EditorState.push(editorState, newContentState, 'remove-range');
         return removeSelectedBlocksStyle(newState)
     }
@@ -158,6 +167,9 @@ export default function RichTextInput({ setMess }) {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div className='emoji-btn-wrapper d-flex flex-column justify-content-end'>
+                <EmojiSelect />
+            </div>
             <div
                 className={editorStyles.editor}
                 style={{ width: '100%' }}
@@ -174,12 +186,12 @@ export default function RichTextInput({ setMess }) {
                 />
                 <Editor
                     placeholder='@ to tag someone'
+                    plugins={plugins}
                     editorKey={'editor'}
                     editorState={editorState}
                     onChange={setEditorState}
                     handleKeyCommand={handleKeyCommand}
                     keyBindingFn={myKeyBindingFn}
-                    plugins={plugins}
                     ref={ref}
                 />
             </div>
@@ -200,7 +212,7 @@ function Entry(props) {
     } = props;
 
     const { selectMention, ...rest } = parentProps;
-    
+
     return (
         <div {...rest} style={{ padding: '8px' }}>
             <div className={theme?.mentionSuggestionsEntryContainer}>

@@ -10,14 +10,16 @@ export default function useMessageConverter({ raw }) {
             const text = e.text;
             const arrayOfIndices = [];
             for (let key of Object.keys(raw.entityMap)) {
-                if (raw.entityMap[key].data.mention.name in obj) {
-                    continue;
-                } else {
-                    obj[raw.entityMap[key].data.mention.name] = 1;
+                if (raw.entityMap[key].type === 'mention') {
+                    if (raw.entityMap[key].data.mention.name in obj) {
+                        continue;
+                    } else {
+                        obj[raw.entityMap[key].data.mention.name] = 1;
+                    }
+                    const mentionName = `@${raw.entityMap[key].data.mention.name}`
+                    const indices = getIndicesOf(mentionName, text, true, raw.entityMap[key].data.mention.link);
+                    arrayOfIndices.push(...indices);
                 }
-                const mentionName = `@${raw.entityMap[key].data.mention.name}`
-                const indices = getIndicesOf(mentionName, text, true, raw.entityMap[key].data.mention.link);
-                arrayOfIndices.push(...indices);
             }
             //
             const p = document.createElement('p');

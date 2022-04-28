@@ -5,12 +5,15 @@
     padding: 10px;
     background-color: #202020;
     box-shadow: inset 0px 1px 8px -3px #ababab;
-  }
+}
 
-  .editor span {
-      color: white;
-  }
-  
-  .editor :global(.public-DraftEditor-content) {
-  }
-  
+.editor span {
+    color: white;
+}
+
+.editor :global(.public-DraftEditor-content) {}
+
+/* emoji btn */
+.options {
+    background-color: red;
+}
