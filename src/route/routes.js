@@ -1,18 +1,27 @@
+import React from "react";
 import BasicLayout from "../layouts/BasicLayout";
-import Chat from "../pages/Chat/Chat";
-import Login from "../pages/Login/Login";
+const Chat = React.lazy(() => import("../pages/Chat/Chat"));
+const Login = React.lazy(() => import("../pages/Login/Login"));
 
 const routes = () => {
     return [
         {
             path: '/login',
-            element: <Login isLogin={false} />,
+            element:
+                <React.Suspense fallback={<>...</>}>
+                    <Login isLogin={false} />
+                </React.Suspense>,
         },
         {
             path: '/',
             element: <BasicLayout />,
             children: [
-                { path: '/:id', element: <Chat /> },
+                {
+                    path: '/:id', element:
+                        <React.Suspense fallback={<>...</>}>
+                            <Chat />
+                        </React.Suspense>
+                },
             ]
         }
     ]
