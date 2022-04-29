@@ -2,8 +2,6 @@
 import { useEffect, useState } from "react"
 import { emoticon } from "../helpers/emoticons";
 import guidGenerator from "../helpers/guiGenerator";
-import generateProfanityRegex from "../helpers/profanity";
-
 import urlRegex from "../helpers/urlRegex";
 
 export default function useMessageConverter({ raw }) {
@@ -15,10 +13,11 @@ export default function useMessageConverter({ raw }) {
             const obj = {};
             const text = e.text;
             const arrayOfIndices = [];
-            // detect -------
-            arrayOfIndices.push(...detectWords(text, urlRegex, true, 'url-link'))
-            arrayOfIndices.push(...detectWords(text, generateProfanityRegex(), false, 'bad-word'))
-            // detect -------
+            const matchedLink = text.match(urlRegex);
+            matchedLink && matchedLink.forEach(link => {
+                const indices = getIndicesOf(link, text, true, link);
+                arrayOfIndices.push(...indices);
+            })
             for (let key of Object.keys(raw.entityMap)) {
                 if (raw.entityMap[key].type === 'mention') {
                     if (raw.entityMap[key].data.mention.name in obj) {
@@ -31,10 +30,7 @@ export default function useMessageConverter({ raw }) {
                     arrayOfIndices.push(...indices);
                 }
             }
-            arrayOfIndices.sort((a, b) => {
-                return a[0] - b[0]
-            })
-            //check if only contain simple text
+            //
             if (arrayOfIndices.length === 0) {
                 const tmpObj = {};
                 tmpObj.id = guidGenerator();
@@ -56,12 +52,10 @@ export default function useMessageConverter({ raw }) {
                     const firstIndex = el[0];
                     const secondIndex = el[1];
                     const link = el[2];
-                    const type = el[3];
                     messageMap.push({
                         id: guidGenerator(),
                         text: text.substring(firstIndex, secondIndex),
-                        link: link,
-                        type: type
+                        link: link
                     })
                     if (index < arrayOfIndices.length - 1) {
                         const firstIndexOfNextElement = arrayOfIndices[index + 1][0];
@@ -82,27 +76,9 @@ export default function useMessageConverter({ raw }) {
             }
         })
         setMassage(messageMap);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [raw])
 
-    const detectWords = (text, regex, isLink, type) => {
-        const matched = text.match(regex);
-        const result = [];
-        matched && matched.forEach(word => {
-
-            let indices = null;
-            if (isLink) {
-                indices = getIndicesOf(word, text, true, word, type)
-            }
-            else {
-                indices = getIndicesOf(word, text, true, null, type)
-            }
-            result.push(...indices);
-        })
-        return result;
-    }
-
-    const getIndicesOf = (searchStr, str, caseSensitive, link, type) => {
+    const getIndicesOf = (searchStr, str, caseSensitive, link) => {
         var searchStrLen = searchStr.length;
         if (searchStrLen === 0) {
             return [];
@@ -116,9 +92,9 @@ export default function useMessageConverter({ raw }) {
         while ((index = str.indexOf(searchStr, startIndex)) > -1) {
             if (!str[index - 1] || str[index - 1] === " ") {
                 if (link) {
-                    indices.push([index, index + searchStrLen, link, type]);
+                    indices.push([index, index + searchStrLen, link]);
                 } else {
-                    indices.push([index, index + searchStrLen, null, type]);
+                    indices.push([index, index + searchStrLen]);
                 }
             }
             startIndex = index + searchStrLen;

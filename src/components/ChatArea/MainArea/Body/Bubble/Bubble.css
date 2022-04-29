@@ -21,7 +21,7 @@
 
 .message-bubble-text span {
     width: 100%;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .message-bubble-icon {
@@ -33,10 +33,18 @@
     font-size: 30px;
 }
 
+.bad-word {
+    text-decoration: line-through;
+}
+
 .tag_link {
-    word-break: break-all;
+    word-break: break-word;
     color: #f64545;
     text-decoration: none;
+}
+
+.url-link {
+    text-decoration: underline !important;
 }
 
 .tag_link:hover {

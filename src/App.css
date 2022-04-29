@@ -299,6 +299,6 @@
 
 .public-DraftStyleDefault-block.public-DraftStyleDefault-ltr {
     width: 100%; 
-    word-break: break-all;
+    word-break: break-word;
     padding: 0 3px;
 }

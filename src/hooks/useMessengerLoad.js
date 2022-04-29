@@ -1,13 +1,8 @@
 // import React from 'react'
 import { useEffect, useState } from 'react'
+import guidGenerator from '../helpers/guiGenerator';
 // import axios from 'axios'
 
-function guidGenerator() {
-    var S4 = function () {
-        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-    };
-    return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
-}
 
 const generate = (num) => {
     const a = []
@@ -20,7 +15,6 @@ const generate = (num) => {
     }
     return a;
 }
-
 
 export default function useMessengerLoad({ setMess, pageNumber }) {
     const [loading, setLoading] = useState(true)
