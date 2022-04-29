@@ -1,5 +1,6 @@
 /* eslint-disable no-control-regex */
 import { useEffect, useState } from "react"
+import { useCensorship } from "../contexts/CensorContext";
 import { emoticon } from "../helpers/emoticons";
 import guidGenerator from "../helpers/guiGenerator";
 import generateProfanityRegex from "../helpers/profanity";
@@ -8,6 +9,8 @@ import urlRegex from "../helpers/urlRegex";
 
 export default function useMessageConverter({ raw }) {
     const [message, setMassage] = useState([])
+    const censorship = useCensorship();
+    
     useEffect(() => {
         // [text, link, emojiOnly]
         const messageMap = [];
@@ -17,7 +20,7 @@ export default function useMessageConverter({ raw }) {
             const arrayOfIndices = [];
             // detect -------
             arrayOfIndices.push(...detectWords(text, urlRegex, true, 'url-link'))
-            arrayOfIndices.push(...detectWords(text, generateProfanityRegex(), false, 'bad-word'))
+            censorship && arrayOfIndices.push(...detectWords(text, generateProfanityRegex(), false, 'bad-word'))
             // detect -------
             for (let key of Object.keys(raw.entityMap)) {
                 if (raw.entityMap[key].type === 'mention') {
@@ -82,8 +85,8 @@ export default function useMessageConverter({ raw }) {
             }
         })
         setMassage(messageMap);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [raw])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [raw, censorship])
 
     const detectWords = (text, regex, isLink, type) => {
         const matched = text.match(regex);
@@ -136,8 +139,6 @@ export default function useMessageConverter({ raw }) {
         })
         return newArr.join(" ");
     }
-
-    // const convertTextToUrl = (text) => {}
 
     const containsOnlyEmojis = (text) => {
         const onlyEmojis = text.replace(new RegExp('[\u0000-\u1eeff]', 'g'), '')

@@ -33,25 +33,12 @@ export default function Body({ mess, setMess }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mess])
 
-    // const lastElementRef = useCallback(node => {
-    //     if (loading) return
-    //     if (observer.current) observer.current.disconnect()
-    //     observer.current = new IntersectionObserver(entries => {
-    //         if (entries[0].isIntersecting && hasMore) {
-    //             setScrolling(true);
-    //             setPageNumber(prevPageNumber => prevPageNumber + 1)
-    //         }
-    //     })
-    //     if (node) observer.current.observe(node)
-    // }, [loading, hasMore])
-
     return (
         <div className='message-chat-body'>
             {mess.length > 0 && mess.map((m, index) => {
                 return <div key={m.id} >
                     {oldAnchorIndex === m.id && <div ref={oldAnchorRef}></div>}
                     <div
-                        // ref={(index === 0) ? lastElementRef : null}
                         className={`${m.sender === 'Me' ? 'message-right' : 'message-left'} }`}
                     >
                         <Bubble mess={m} />

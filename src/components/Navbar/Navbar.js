@@ -1,6 +1,11 @@
 import React from 'react'
+import { Form } from 'react-bootstrap'
+import { useCensorship, useCensorshipUpdate } from '../../contexts/CensorContext';
 import './Navbar.css'
 export default function Navbar({ isLogin }) {
+    const censorship = useCensorship();
+    const updateCensorship = useCensorshipUpdate();
+
     return (
         <div style={{ position: 'relative' }}>
             <nav className='master-nav'>
@@ -10,6 +15,14 @@ export default function Navbar({ isLogin }) {
                     <span style={{ color: 'red' }}>N</span>
                     <span>o</span>
                 </h2>
+                <div>
+                    <Form.Check
+                        checked={censorship}
+                        onChange={updateCensorship}
+                        type="switch"
+                        id="disabled-custom-switch"
+                    />
+                </div>
                 {!isLogin ? <div className="inputs">
                     <form>
                         <div className='h-100'>

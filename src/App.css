@@ -12,6 +12,10 @@
 
 /* ------------------------------------ */
 
+.MentionsStyles_mentionSuggestions__BHf5k {
+    z-index: 1001 !important;
+}
+
 .emoji-btn-wrapper button {
     background-color: transparent;
     border: none;
@@ -298,7 +302,7 @@
 }
 
 .public-DraftStyleDefault-block.public-DraftStyleDefault-ltr {
-    width: 100%; 
+    width: 100%;
     word-break: break-word;
     padding: 0 3px;
 }
