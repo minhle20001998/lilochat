@@ -1,0 +1,45 @@
+.input-preview-area {
+  width: 100%;
+  padding: 0 50px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.preview-image-wrapper {
+  width: 80px;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  position: relative;
+}
+
+.preview-image {
+  width: 70px;
+  height: 60px;
+  border: 1px solid rgb(133, 0, 0);
+}
+
+.remove-preview-image {
+  position: absolute;
+  border: 1px solid rgb(133, 0, 0);
+  background-color: black;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.remove-preview-image:hover {
+  background-color: rgb(19, 19, 19);
+}

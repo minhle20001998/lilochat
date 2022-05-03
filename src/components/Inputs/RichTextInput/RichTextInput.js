@@ -18,35 +18,35 @@ import '@draft-js-plugins/emoji/lib/plugin.css';
 import './RichTextInput.css'
 import mentionsStyles from './MentionsStyles.module.css';
 import getDefaultKeyBinding from 'draft-js/lib/getDefaultKeyBinding';
+import PasteImageArea from '../../PasteImageArea/PasteImageArea';
 
 const mentions = [
     {
-        name: "Matthew Russell",
-        link: "https://twitter.com/mrussell247",
+        name: "Vinh",
+        link: "https://twitter.com/psbrandt",
         avatar:
-            "https://pbs.twimg.com/profile_images/517863945/mattsailing_400x400.jpg",
+            "https://scontent.fhan15-2.fna.fbcdn.net/v/t1.6435-9/45008430_1100045520175733_1722673612483198976_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=TVdF2phEHuoAX-MMkO4&_nc_ht=scontent.fhan15-2.fna&oh=00_AT8qlPoUbNY_UdkSsdnpAqzJr7ZyOoium6jHGkV1DTJvLg&oe=62989C2C",
         userId: 13
     },
     {
-        name: 'hehe',
-        link: "https://twitter.com/juliandoesstuff",
-        avatar: "https://avatars2.githubusercontent.com/u/1188186?v=3&s=400"
-    },
-    {
-        name: "Jyoti Puri",
-        link: "https://twitter.com/jyopur",
-        avatar: "https://avatars0.githubusercontent.com/u/2182307?v=3&s=400"
-    },
-    {
-        name: "Nik Graf",
-        link: "https://twitter.com/nikgraf",
-        avatar: "https://avatars0.githubusercontent.com/u/223045?v=3&s=400"
-    },
-    {
-        name: "Minh",
+        name: 'Nguyen',
         link: "https://twitter.com/psbrandt",
-        avatar:
-            "https://pbs.twimg.com/profile_images/688487813025640448/E6O6I011_400x400.png"
+        avatar: "https://scontent.fhan15-2.fna.fbcdn.net/v/t1.6435-1/38028711_1332203606915524_589850110985240576_n.jpg?stp=dst-jpg_s320x320&_nc_cat=101&ccb=1-5&_nc_sid=7206a8&_nc_ohc=UP_tTWlWZY4AX_t0m1W&_nc_oc=AQntzOS9KgqTcFgRBXrUvJQTc3vTdxBXw4CFOjPR7u-mbCC6zZYEjO0plz4QWJa_FuZ-yim5CvhKV-939Mb4x0wT&_nc_ht=scontent.fhan15-2.fna&oh=00_AT-X6KcbTwBDPZDwWNgQX_NSQ-zUkLnr4kBIlnVwqdpkHQ&oe=62983DF8"
+    },
+    {
+        name: "Thinh",
+        link: "https://twitter.com/psbrandt",
+        avatar: "https://scontent.fhan15-2.fna.fbcdn.net/v/t1.6435-9/46293645_319028038895772_5817295248358899712_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=sUn3hq4iPawAX-VfmhB&tn=3N_8jSrqGPPu2ZTd&_nc_ht=scontent.fhan15-2.fna&oh=00_AT87x9ZdX8grIQytpW1pdYkCufDmedrQyqQJYgBP3IsFdw&oe=6294F256"
+    },
+    {
+        name: "Gsu",
+        link: "https://twitter.com/psbrandt",
+        avatar: "https://scontent.fhan15-2.fna.fbcdn.net/v/t1.6435-9/83879772_1272555119610923_3400956865356496896_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=c67z_OQNGo8AX-RnNqH&_nc_ht=scontent.fhan15-2.fna&oh=00_AT-z_-xhB-jF5NKnDp8IHMhUBMcY_YfP7Wbp7x4vmsoYfg&oe=6296B6FD"
+    },
+    {
+        name: "Đứk",
+        link: "https://twitter.com/psbrandt",
+        avatar: "https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-1/275240617_1553854601662540_3964833341271906446_n.jpg?stp=dst-jpg_p320x320&_nc_cat=111&ccb=1-5&_nc_sid=7206a8&_nc_ohc=7mmnmPWzAREAX_h6z5O&_nc_ht=scontent.fhan15-2.fna&oh=00_AT-hMg3JCVAcqLjA7SKo-M-T07Vfio5FVB-hw37dCM-87A&oe=62769CBD"
     }
 ];
 
@@ -57,6 +57,7 @@ export default function RichTextInput({ setMess }) {
     );
     const [suggestions, setSuggestions] = useState(mentions);
     const [mentionPeople, setMentionPeople] = useState([]);
+    const [pastedImages, setPastedImages] = useState([]);
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
@@ -139,8 +140,8 @@ export default function RichTextInput({ setMess }) {
                     content: convertToRaw(editorState.getCurrentContent())
                 }]
             })
-            const editor = getResetEditorState(editorState);
-            setEditorState(editor)
+            const clearedEditor = getResetEditorState(editorState);
+            setEditorState(clearedEditor)
         }
     }
 
@@ -165,39 +166,50 @@ export default function RichTextInput({ setMess }) {
         return getDefaultKeyBinding(e);
     }
 
+    const handleImagePaste = (pasteEvent) => {
+        const item = pasteEvent.clipboardData.items[0];
+        if (item.type.indexOf("image") === 0) {
+            setPastedImages([...pastedImages, item.getAsFile()]);
+        }
+    }
+
     return (
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <div className='emoji-btn-wrapper d-flex flex-column justify-content-end'>
-                <EmojiSelect />
-            </div>
-            <div
-                className={editorStyles.editor}
-                style={{ width: '100%' }}
-                onClick={() => {
-                    ref.current.focus();
-                }}
-            >
-                <MentionSuggestions
-                    suggestions={suggestions}
-                    onSearchChange={onSearchChange}
-                    entryComponent={Entry}
-                    open={open}
-                    onOpenChange={onOpenChange}
-                />
-                <Editor
-                    placeholder='@ to tag someone'
-                    plugins={plugins}
-                    editorKey={'editor'}
-                    editorState={editorState}
-                    onChange={setEditorState}
-                    handleKeyCommand={handleKeyCommand}
-                    keyBindingFn={myKeyBindingFn}
-                    ref={ref}
-                />
-            </div>
-            <div className='d-flex flex-column justify-content-end'>
-                <button className='submit-btn' onClick={submit}>Send</button>
-            </div>
+        <div>
+            {pastedImages.length > 0 && <PasteImageArea pastedImages={pastedImages} setPastedImages={setPastedImages} />}
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <div className='emoji-btn-wrapper d-flex flex-column justify-content-end'>
+                    <EmojiSelect />
+                </div>
+                <div
+                    className={editorStyles.editor}
+                    style={{ width: '100%' }}
+                    onClick={() => {
+                        ref.current.focus();
+                    }}
+                    onPaste={handleImagePaste}
+                >
+                    <MentionSuggestions
+                        suggestions={suggestions}
+                        onSearchChange={onSearchChange}
+                        entryComponent={Entry}
+                        open={open}
+                        onOpenChange={onOpenChange}
+                    />
+                    <Editor
+                        placeholder='@ to tag someone'
+                        plugins={plugins}
+                        editorKey={'editor'}
+                        editorState={editorState}
+                        onChange={setEditorState}
+                        handleKeyCommand={handleKeyCommand}
+                        keyBindingFn={myKeyBindingFn}
+                        ref={ref}
+                    />
+                </div>
+                <div className='d-flex flex-column justify-content-end'>
+                    <button className='submit-btn' onClick={submit}>Send</button>
+                </div>
+            </div >
         </div>
     );
 }
