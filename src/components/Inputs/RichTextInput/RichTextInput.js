@@ -18,7 +18,8 @@ import '@draft-js-plugins/emoji/lib/plugin.css';
 import './RichTextInput.css'
 import mentionsStyles from './MentionsStyles.module.css';
 import getDefaultKeyBinding from 'draft-js/lib/getDefaultKeyBinding';
-import PasteImageArea from '../../PasteImageArea/PasteImageArea';
+import PreviewFile from '../../PasteImageArea/PreviewFile';
+import { useFiles, useFilesUpdate } from '../../../contexts/FilesContext';
 
 const mentions = [
     {
@@ -57,7 +58,9 @@ export default function RichTextInput({ setMess }) {
     );
     const [suggestions, setSuggestions] = useState(mentions);
     const [mentionPeople, setMentionPeople] = useState([]);
-    const [pastedImages, setPastedImages] = useState([]);
+    // const [pastedImages, setPastedImages] = useState([]);
+    const files = useFiles();
+    const updateFiles = useFilesUpdate();
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
@@ -169,13 +172,13 @@ export default function RichTextInput({ setMess }) {
     const handleImagePaste = (pasteEvent) => {
         const item = pasteEvent.clipboardData.items[0];
         if (item.type.indexOf("image") === 0) {
-            setPastedImages([...pastedImages, item.getAsFile()]);
+            updateFiles(item.getAsFile());
         }
     }
 
     return (
         <div>
-            {pastedImages.length > 0 && <PasteImageArea pastedImages={pastedImages} setPastedImages={setPastedImages} />}
+            {files.length > 0 && <PreviewFile />}
             <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <div className='emoji-btn-wrapper d-flex flex-column justify-content-end'>
                     <EmojiSelect />
