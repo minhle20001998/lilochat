@@ -74,9 +74,9 @@ export default function Body({ mess, setMess }) {
                     return <div key={m.id} >
                         {oldAnchorIndex === m.id && <div ref={oldAnchorRef}></div>}
                         <div
-                            className={`${m.sender === 'Me' ? 'message-right' : 'message-left'} }`}
+                            className={`${m.sender === 'Me' ? 'message-left' : 'message-left'} }`}
                         >
-                            <Bubble mess={m} />
+                            <Bubble mess={m}/>
                         </div>
                     </div>
                 })}

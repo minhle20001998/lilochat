@@ -8,14 +8,6 @@ export default function ChatList() {
         { id: 2, status: 'offline', name: 'nguyen' },
         { id: 3, status: 'iddle', name: 'vinh' },
         { id: 4, status: 'disturb', name: 'duk' },
-        { id: 5, status: 'disturb', name: 'duk' },
-        { id: 6, status: 'disturb', name: 'duk' },
-        { id: 7, status: 'disturb', name: 'duk' },
-        { id: 8, status: 'disturb', name: 'duk' },
-        { id: 9, status: 'disturb', name: 'duk' },
-        { id: 10, status: 'disturb', name: 'duk' },
-        { id: 11, status: 'disturb', name: 'duk' },
-        { id: 12, status: 'disturb', name: 'duk' },
     ];
 
     const b = [

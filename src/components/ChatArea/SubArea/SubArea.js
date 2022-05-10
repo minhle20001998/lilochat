@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router';
+import { useCallData } from '../../../contexts/CallDataContext';
 import ListItem from '../../ChatList/ListItem/ListItem'
 import GroupImageModal from '../../Modals/GroupImageModal/GroupImageModal';
 import GroupNameModal from '../../Modals/GroupNameModal/GroupNameModal';
 import './SubArea.css'
 
-const a = [
-    { id: 1, status: 'online', name: 'minh' },
-    { id: 2, status: 'offline', name: 'nguyen' },
-];
-
 export default function SubArea({ setGroupName }) {
     const [showGroupNameModal, setShowGroupNameModal] = useState(false);
     const [showImageModal, setShowImageModal] = useState(false);
+    const [toggleSetting, setToggleSetting] = useState(true);
+    const [toggleMembers, setToggleMemebers] = useState(true);
+    const [toggleActions, setToggleActions] = useState(true);
+    let navigate = useNavigate();
+    const { users } = useCallData();
 
     const handleCloseGroupNameModal = () => setShowGroupNameModal(false);
 
@@ -20,6 +22,10 @@ export default function SubArea({ setGroupName }) {
     const handleCloseImageModal = () => setShowImageModal(false);
 
     const handleShowImageModal = () => setShowImageModal(true);
+
+    const handleOpenCallWindow = () => {
+        navigate('/call/1')
+    }
 
 
     return (
@@ -32,12 +38,19 @@ export default function SubArea({ setGroupName }) {
             <GroupImageModal
                 show={showImageModal}
                 handleClose={handleCloseImageModal}
-                // setGroupName={setGroupName}
+            // setGroupName={setGroupName}
             />
-            <div className='chat-subarea-header'>
+            <div
+                className='chat-subarea-header'
+                onClick={() => { setToggleSetting(prev => !prev) }}
+                style={{
+                    cursor: 'pointer',
+                    userSelect: 'none'
+                }}
+            >
                 <h5 className='m-0'>Setting</h5>
             </div>
-            <div>
+            <div style={{ display: `${toggleSetting ? 'block' : 'none'}` }}>
                 <div className='chat-subarea-items' onClick={handleShowGroupNameModal}>
                     Change Group Name
                 </div>
@@ -48,12 +61,42 @@ export default function SubArea({ setGroupName }) {
                     Add people
                 </div>
             </div>
-            <div className='chat-subarea-header' style={{ borderTop: '1px solid #770000' }}>
+            {/*  */}
+            <div className='chat-subarea-header'
+                onClick={() => { setToggleActions(prev => !prev) }}
+                style={{
+                    borderTop: '1px solid #770000',
+                    cursor: 'pointer',
+                    userSelect: 'none'
+                }}
+            >
+                <h5 className='m-0'>Actions</h5>
+            </div>
+            <div style={{ display: `${toggleActions ? 'block' : 'none'}` }}>
+                <div className='chat-subarea-items' onClick={handleOpenCallWindow}>
+                    Voice Call
+                </div>
+                <div className='chat-subarea-items'>
+                    Reminder
+                </div>
+            </div>
+            {/*  */}
+            <div className='chat-subarea-header'
+                onClick={() => { setToggleMemebers(prev => !prev) }}
+                style={{
+                    borderTop: '1px solid #770000',
+                    cursor: 'pointer',
+                    userSelect: 'none'
+                }}
+            >
                 <h5 className='m-0'>Chat Member</h5>
             </div>
-            <div className='chat-subarea-members'>
-                {a.map(e => {
-                    return <ListItem key={e.id} name={e.name} status={e.status} />
+            <div
+                className='chat-subarea-members'
+                style={{ display: `${toggleMembers ? 'block' : 'none'}` }}
+            >
+                {users.length > 0 && users.map(user => {
+                    return <ListItem name={user} status={'online'} />
                 })}
             </div>
         </div>

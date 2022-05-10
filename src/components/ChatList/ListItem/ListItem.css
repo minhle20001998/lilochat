@@ -66,3 +66,8 @@
     width: 100%;
     border-radius: 100%;
 }
+
+.chat-subarea-members {
+    width: 100%;
+    overflow: hidden !important;
+}

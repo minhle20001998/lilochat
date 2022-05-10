@@ -20,9 +20,9 @@ export default function ListItem({ status, name }) {
 
     return (
         <div className='list-friend-item'>
-            <div className='d-flex flex-row'>
+            <div className='d-flex flex-row w-100' style={{ overflow: 'hidden' }}>
                 <img className='avatar' src={src} alt='' />
-                <div className='name'><p className='m-0'>{name}</p></div>
+                <div className='name w-100' style={{ overflow: 'hidden' }}><p className='m-0' >{name}</p></div>
             </div>
             <div className='status'>
                 {/* <div className='online'></div> */}

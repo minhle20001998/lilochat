@@ -11,15 +11,16 @@ import createMentionPlugin, {
     defaultSuggestionsFilter
 } from "@draft-js-plugins/mention";
 import createEmojiPlugin from '@draft-js-plugins/emoji';
+import getDefaultKeyBinding from 'draft-js/lib/getDefaultKeyBinding';
+import PreviewFile from '../../PasteImageArea/PreviewFile';
+import { useFiles, useFilesUpdate } from '../../../contexts/FilesContext';
 import editorStyles from './editorStyles.module.css';
+import mentionsStyles from './MentionsStyles.module.css';
 import 'draft-js/dist/Draft.css';
 import '@draft-js-plugins/mention/lib/plugin.css';
 import '@draft-js-plugins/emoji/lib/plugin.css';
 import './RichTextInput.css'
-import mentionsStyles from './MentionsStyles.module.css';
-import getDefaultKeyBinding from 'draft-js/lib/getDefaultKeyBinding';
-import PreviewFile from '../../PasteImageArea/PreviewFile';
-import { useFiles, useFilesUpdate } from '../../../contexts/FilesContext';
+
 
 const mentions = [
     {

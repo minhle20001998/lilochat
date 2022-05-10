@@ -46,7 +46,12 @@ export default function GroupNameModal(props) {
                     <span>{textLength}/{maxLength}</span>
                     <input
                         className='w-100'
-                        style={{ height: '40px', color: 'black' }}
+                        style={{
+                            height: '40px',
+                            color: 'white',
+                            background: 'black',
+                            border: '1px solid #681818'
+                        }}
                         placeholder="Enter new Group Name"
                         onInput={handleOnInput}
                         value={input}

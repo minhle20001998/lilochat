@@ -20,3 +20,7 @@ body {
 p {
   margin: 0 !important
 }
+
+input:focus-visible {
+  outline: none !important;
+}

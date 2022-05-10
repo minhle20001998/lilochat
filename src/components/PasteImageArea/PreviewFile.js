@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useFiles, useFilesRemove, useFilesUpdate } from '../../contexts/FilesContext';
+import { useFiles, useFilesRemove } from '../../contexts/FilesContext';
 import './PreviewFile.css'
 const fileImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/File_alt_font_awesome.svg/1024px-File_alt_font_awesome.svg.png'
 export default function PasteImageArea() {
   const files = useFiles();
-  const updateFiles = useFilesUpdate();
   const removeFiles = useFilesRemove();
   const [filePreview, setFilePreview] = useState([]);
 

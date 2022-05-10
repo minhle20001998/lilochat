@@ -10,9 +10,9 @@ export default function Navbar({ isLogin }) {
         <div style={{ position: 'relative' }}>
             <nav className='master-nav'>
                 <h2 className="my-0">
-                    <span style={{ color: 'red' }}>N</span>
+                    <span style={{ color: 'red' }}>L</span>
                     <span>i</span>
-                    <span style={{ color: 'red' }}>N</span>
+                    <span style={{ color: 'red' }}>L</span>
                     <span>o</span>
                 </h2>
                 <div>

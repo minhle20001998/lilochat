@@ -5,11 +5,20 @@ import App from './App';
 import { BrowserRouter } from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import FilesProvider from './contexts/FilesContext';
+import CensorProvider from './contexts/CensorContext';
+import CallDataProvider from './contexts/CallDataContext';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <CallDataProvider>
+    <FilesProvider>
+      <CensorProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </CensorProvider>
+    </FilesProvider>
+  </CallDataProvider>
   ,
   document.getElementById('root')
 );
