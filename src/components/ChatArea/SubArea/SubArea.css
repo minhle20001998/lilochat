@@ -18,3 +18,7 @@
   height: calc(100vh - 315px);
   overflow: auto;
 }
+
+.chat-subarea-header h5.closed {
+  color: rgb(145, 145, 145);
+}

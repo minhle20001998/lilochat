@@ -45,10 +45,12 @@ export default function SubArea({ setGroupName }) {
                 onClick={() => { setToggleSetting(prev => !prev) }}
                 style={{
                     cursor: 'pointer',
-                    userSelect: 'none'
+                    userSelect: 'none',
                 }}
             >
-                <h5 className='m-0'>Setting</h5>
+                <h5 className={`m-0 ${!toggleSetting ? 'closed' : ''}`}>
+                    Setting
+                </h5>
             </div>
             <div style={{ display: `${toggleSetting ? 'block' : 'none'}` }}>
                 <div className='chat-subarea-items' onClick={handleShowGroupNameModal}>
@@ -67,12 +69,16 @@ export default function SubArea({ setGroupName }) {
                 style={{
                     borderTop: '1px solid #770000',
                     cursor: 'pointer',
-                    userSelect: 'none'
+                    userSelect: 'none',
                 }}
             >
-                <h5 className='m-0'>Actions</h5>
+                <h5 className={`m-0 ${!toggleActions ? 'closed' : ''}`}>
+                    Actions
+                </h5>
             </div>
-            <div style={{ display: `${toggleActions ? 'block' : 'none'}` }}>
+            <div style={{
+                display: `${toggleActions ? 'block' : 'none'}`,
+            }}>
                 <div className='chat-subarea-items' onClick={handleOpenCallWindow}>
                     Voice Call
                 </div>
@@ -86,10 +92,12 @@ export default function SubArea({ setGroupName }) {
                 style={{
                     borderTop: '1px solid #770000',
                     cursor: 'pointer',
-                    userSelect: 'none'
+                    userSelect: 'none',
                 }}
             >
-                <h5 className='m-0'>Chat Member</h5>
+                <h5 className={`m-0 ${!toggleMembers ? 'closed' : ''}`}>
+                    Chat Member
+                </h5>
             </div>
             <div
                 className='chat-subarea-members'

@@ -15,6 +15,9 @@
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
   z-index: 10;
   background-color: #242424;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 }
 
 .chat-mainarea-body {
@@ -28,28 +31,11 @@
   height: fit-content;
 }
 
-.hamberger-icon {
-  width: 30px;
-  height: 30px;
-  border: 1px solid gray;
-  padding: 5px;
-  margin-right: 20px;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 3px;
-  cursor: pointer;
-  display: none;
-}
-
-.hamberger-icon > div {
-  width: 100%;
-  background-color: gray;
-  height: 2px;
-}
-
-@media (max-width: 900px) {
-  .hamberger-icon {
-    display: flex;
-  }
+.group-name-title {
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  margin: 0;
 }

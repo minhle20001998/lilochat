@@ -20,16 +20,10 @@ const routes = () => {
             element: <BasicLayout />,
             children: [
                 {
-                    path: '/message/:id', element:
-                        <React.Suspense fallback={<Fallback />}>
-                            <Chat />
-                        </React.Suspense>
+                    path: '/message/:id', element: <Chat />
                 },
                 {
-                    path: '/call/:id', element:
-                        <React.Suspense fallback={<Fallback />}>
-                            <Call />
-                        </React.Suspense>
+                    path: '/call/:id', element: <Call />
                 }
             ]
         }

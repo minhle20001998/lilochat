@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Hamberger from '../../Buttons/Hamberger/Hamberger';
 import RichTextInput from '../../Inputs/RichTextInput/RichTextInput';
 import Body from './Body/Body';
 import './MainArea.css';
@@ -14,52 +15,20 @@ export default function MainArea({ groupName, setActiveChatList, setActiveChatSe
 
     return (
         <div className="chat-mainarea" style={{ position: 'relative' }}>
-            <div className='chat-mainarea-header'
-                style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    flexDirection: 'row'
-                }}
-            >
-                <div
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        flexDirection: 'row'
-                    }}
-                >
-                    <div className='hamberger-icon' onClick={() => { setActiveChatList(true) }}>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
+            <div className='chat-mainarea-header'>
+                <div className='d-flex align-items-center flex-row'>
+                    <Hamberger onClick={() => { setActiveChatList(true) }} />
                     <img className='avatar' src={src} alt='' />
-                    <h5 className='m-0' style={{
-                        fontSize: '20px',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        maxWidth: '200px'
-                    }}>
+                    <h5 className='group-name-title'>
                         {groupName}
                     </h5>
                 </div>
-                <div>
-                    <div className='hamberger-icon'
-                        style={{ marginRight: 0 }}
-                        onClick={() => { setActiveChatSetting(true) }}
-                    >
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
+                <Hamberger onClick={() => { setActiveChatSetting(true) }} />
             </div>
             <div className='chat-mainarea-body'>
                 <Body mess={mess} setMess={setMess} />
             </div>
             <div className='chat-mainarea-footer'>
-                {/* <ChatInput mess={mess} setMess={setMess} /> */}
                 <RichTextInput setMess={setMess} />
             </div>
         </div >
